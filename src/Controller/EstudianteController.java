@@ -14,6 +14,7 @@ import java.util.List;
 import modelo.Ciudades;
 import modelo.Departamentos;
 import modelo.Estudiante;
+import modelo.Identificacion;
 import org.hibernate.HibernateException;
 import repositorio.EstudianteDao;
 import repositorio.Runner;
@@ -33,11 +34,24 @@ public class EstudianteController {
     Departamentos[] dep;
     Ciudades[] ciu;
     List<Estudiante> traerEstudiantes;
+    ArrayList<String> tipoIdentificacion = new ArrayList<String>();
+    Identificacion[] iden;
+    List<Estudiante> buscarEstudiantes;
+    String campo;
+    String valor;
 
     public EstudianteController() {
         estudiantenuevo = new Estudiante();
         enumDepartamentos();
         listaEstudiantes();
+    }
+    
+    public ArrayList<String> enumIdentificacion(){
+        iden = Identificacion.values();
+        for(Identificacion ident: iden){
+            tipoIdentificacion.add(ident.toString());
+        }
+        return tipoIdentificacion;
     }
     
     public ArrayList<String> enumDepartamentos(){
@@ -89,6 +103,23 @@ public class EstudianteController {
         session.close();
         return traerEstudiantes;
     }
+    
+    public List<Estudiante> buscarEstud(){
+        return buscarEstudiantes();
+    }
+    
+    private List<Estudiante> buscarEstudiantes(){
+        session = SessionFactoryProvider.getInstance().createSession();
+        tx = session.beginTransaction();
+        Runner.addSession(session);
+        estudiantedao = new EstudianteDao();
+        buscarEstudiantes = estudiantedao.buscarEstudiantesSimilares(campo, valor);
+        tx.commit();
+        session.close();
+        campo = "";
+        valor="";
+        return buscarEstudiantes;
+    }
 
     public List<Estudiante> getTraerEstudiantes() {
         return traerEstudiantes;
@@ -130,5 +161,47 @@ public class EstudianteController {
     public void setDepartamentos(ArrayList<String> departamentos) {
         this.departamentos = departamentos;
     }
+
+    public ArrayList<String> getCiudades() {
+        return ciudades;
+    }
+
+    public void setCiudades(ArrayList<String> ciudades) {
+        this.ciudades = ciudades;
+    }
+
+    public ArrayList<String> getTipoIdentificacion() {
+        return tipoIdentificacion;
+    }
+
+    public void setTipoIdentificacion(ArrayList<String> tipoIdentificacion) {
+        this.tipoIdentificacion = tipoIdentificacion;
+    }
+
+    public List<Estudiante> getBuscarEstudiantes() {
+        return buscarEstudiantes;
+    }
+
+    public void setBuscarEstudiantes(List<Estudiante> buscarEstudiantes) {
+        this.buscarEstudiantes = buscarEstudiantes;
+    }
+
+    public String getCampo() {
+        return campo;
+    }
+
+    public void setCampo(String campo) {
+        this.campo = campo;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+    
+    
 
 }

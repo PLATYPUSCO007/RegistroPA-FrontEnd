@@ -23,6 +23,7 @@ public class VAlumno extends javax.swing.JFrame {
     VCrearAlumnos vcrear;
     List<Estudiante> listaEstudiantes;
     EstudianteController estudiantecontroller;
+    VBuscarAlumnos vbuscar;
 
     public VAlumno() {
         estudiantecontroller = new EstudianteController();
@@ -52,9 +53,7 @@ public class VAlumno extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(480, 400));
         setMinimumSize(new java.awt.Dimension(480, 400));
-        setPreferredSize(new java.awt.Dimension(480, 400));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -99,6 +98,11 @@ public class VAlumno extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar.png"))); // NOI18N
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(70, 30, 90, 60);
 
@@ -157,6 +161,7 @@ public class VAlumno extends javax.swing.JFrame {
         listaEstudiantes.stream().map((estudiantes) -> new Object[]{estudiantes.getId(),
             estudiantes.getNombre(),
             estudiantes.getApellidos(),
+            estudiantes.getTipoIdentificacion(),
             estudiantes.getIdentificacion(),
             estudiantes.getFechaDeIngreso()
         }).map((objetos) -> {
@@ -166,6 +171,14 @@ public class VAlumno extends javax.swing.JFrame {
         Tmodel.getDataVector();
     });
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        vbuscar = new VBuscarAlumnos();
+        vbuscar.setVisible(true);
+        vbuscar.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,7 +233,7 @@ public class VAlumno extends javax.swing.JFrame {
         Tmodel.addColumn("Id");
         Tmodel.addColumn("Nombre");
         Tmodel.addColumn("Apellido");
-        Tmodel.addColumn("Identificacion");
+        Tmodel.addColumn("Tipo Ident.");
         Tmodel.addColumn("Nº Ident.");
         Tmodel.addColumn("Fecha Ingr.");
         jTable1.setModel(Tmodel);
