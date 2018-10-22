@@ -39,32 +39,34 @@ public class EstudianteController {
     List<Estudiante> buscarEstudiantes;
     String campo;
     String valor;
+    Estudiante estudianteactualizar;
+    int key = 0;
 
     public EstudianteController() {
         estudiantenuevo = new Estudiante();
         enumDepartamentos();
         listaEstudiantes();
     }
-    
-    public ArrayList<String> enumIdentificacion(){
+
+    public ArrayList<String> enumIdentificacion() {
         iden = Identificacion.values();
-        for(Identificacion ident: iden){
+        for (Identificacion ident : iden) {
             tipoIdentificacion.add(ident.toString());
         }
         return tipoIdentificacion;
     }
-    
-    public ArrayList<String> enumDepartamentos(){
+
+    public ArrayList<String> enumDepartamentos() {
         dep = Departamentos.values();
-        for (Departamentos depa : dep){
+        for (Departamentos depa : dep) {
             departamentos.add(depa.toString());
         }
         return departamentos;
     }
-    
-    public ArrayList<String> enumCiudades(){
+
+    public ArrayList<String> enumCiudades() {
         ciu = Ciudades.values();
-        for (Ciudades ciud: ciu){
+        for (Ciudades ciud : ciu) {
             ciudades.add(ciud.toString());
         }
         return ciudades;
@@ -88,12 +90,12 @@ public class EstudianteController {
         tx.commit();
         session.close();
     }
-    
-    public List<Estudiante> listaEstudiantes(){
+
+    public List<Estudiante> listaEstudiantes() {
         return traerEstudiantes();
     }
-    
-    private List<Estudiante> traerEstudiantes(){
+
+    private List<Estudiante> traerEstudiantes() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
@@ -103,22 +105,73 @@ public class EstudianteController {
         session.close();
         return traerEstudiantes;
     }
-    
-    public List<Estudiante> buscarEstud(){
+
+    public List<Estudiante> buscarEstud() {
         return buscarEstudiantes();
     }
-    
-    private List<Estudiante> buscarEstudiantes(){
+
+    private List<Estudiante> buscarEstudiantes() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
         estudiantedao = new EstudianteDao();
-        buscarEstudiantes = estudiantedao.buscarEstudiantesSimilares(campo, valor);
+        if (campo.equalsIgnoreCase("identificacion")) {
+            buscarEstudiantes = estudiantedao.buscarEstudiantesSimilares(campo, Integer.parseInt(valor));
+        } else {
+            buscarEstudiantes = estudiantedao.buscarEstudiantesSimilares(campo, valor);
+        }
         tx.commit();
         session.close();
         campo = "";
-        valor="";
+        valor = "";
         return buscarEstudiantes;
+    }
+
+    public Estudiante traerUnEstudiante() {
+        session = SessionFactoryProvider.getInstance().createSession();
+        tx = session.beginTransaction();
+        Runner.addSession(session);
+        estudiantedao = new EstudianteDao();
+        estudianteactualizar = estudiantedao.recuperar(key);
+        tx.commit();
+        session.close();
+        return estudianteactualizar;
+    }
+
+    public void editar() {
+        try {
+            editarEstudiante();
+        } catch (HibernateException exception) {
+            System.out.println("Problem creating session factory");
+            exception.printStackTrace();
+        }
+    }
+
+    private void editarEstudiante() {
+        session = SessionFactoryProvider.getInstance().createSession();
+        tx = session.beginTransaction();
+        Runner.addSession(session);
+        estudiantedao = new EstudianteDao();
+        estudiantedao.actualizar(estudianteactualizar);
+        tx.commit();
+        session.close();
+    }
+
+    public void eliminar() {
+        try {
+            eliminarEstudiante();
+        } catch (Exception e) {
+        }
+    }
+
+    private void eliminarEstudiante() {
+        session = SessionFactoryProvider.getInstance().createSession();
+        tx = session.beginTransaction();
+        Runner.addSession(session);
+        estudiantedao = new EstudianteDao();
+        estudiantedao.borrar("id", key);
+        tx.commit();
+        session.close();
     }
 
     public List<Estudiante> getTraerEstudiantes() {
@@ -128,7 +181,6 @@ public class EstudianteController {
     public void setTraerEstudiantes(List<Estudiante> traerEstudiantes) {
         this.traerEstudiantes = traerEstudiantes;
     }
-    
 
     public EstudianteDao getEstudiantedao() {
         return estudiantedao;
@@ -201,7 +253,21 @@ public class EstudianteController {
     public void setValor(String valor) {
         this.valor = valor;
     }
-    
-    
+
+    public Estudiante getEstudianteactualizar() {
+        return estudianteactualizar;
+    }
+
+    public void setEstudianteactualizar(Estudiante estudianteactualizar) {
+        this.estudianteactualizar = estudianteactualizar;
+    }
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
 
 }

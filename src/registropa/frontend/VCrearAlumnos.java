@@ -27,6 +27,8 @@ public class VCrearAlumnos extends javax.swing.JFrame {
      */
     EstudianteController estudiantecontroller;
     VAlumno valumno;
+    Estudiante estudianteactualizar;
+    int actividad = 0;
 
     public VCrearAlumnos() {
         estudiantecontroller = new EstudianteController();
@@ -34,6 +36,17 @@ public class VCrearAlumnos extends javax.swing.JFrame {
         initDepartamentos();
         initCiudades();
         initTipoIden();
+        actividad = 1;
+    }
+
+    public VCrearAlumnos(Estudiante estudianteactualizar) {
+        estudiantecontroller = new EstudianteController();
+        this.estudianteactualizar = estudianteactualizar;
+        initComponents();
+        initDepartamentos();
+        initCiudades();
+        initTipoIden();
+        actividad = 2;
     }
 
     public EstudianteController getEstudiantecontroller() {
@@ -43,7 +56,6 @@ public class VCrearAlumnos extends javax.swing.JFrame {
     public void setEstudiantecontroller(EstudianteController estudiantecontroller) {
         this.estudiantecontroller = estudiantecontroller;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,20 +82,45 @@ public class VCrearAlumnos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jDate = new com.toedter.calendar.JDateChooser();
         jComboBox3 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 300));
+        setMinimumSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(new java.awt.Dimension(500, 300));
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(null);
+
+        jPanel1.setLayout(null);
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${estudiantecontroller.estudiantenuevo.nombre}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(96, 16, 355, 20);
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${estudiantecontroller.estudiantenuevo.apellidos}"), jTextField2, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        jPanel1.add(jTextField2);
+        jTextField2.setBounds(96, 45, 355, 20);
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${estudiantecontroller.estudiantenuevo.identificacion}"), jTextField3, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
+
+        jPanel1.add(jTextField3);
+        jTextField3.setBounds(96, 71, 114, 20);
+        jPanel1.add(jTextField6);
+        jTextField6.setBounds(263, 71, 188, 20);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bogota" }));
 
@@ -93,107 +130,55 @@ public class VCrearAlumnos extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${estudiantenuevo.ciudad.declaringClass}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(25, 109, 80, 20);
+
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cundinamarca" }));
+        jPanel1.add(jComboBox2);
+        jComboBox2.setBounds(196, 109, 93, 20);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombres:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(25, 19, 46, 14);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Apellidos:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(25, 48, 46, 14);
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Departamento");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(206, 135, 69, 14);
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Ciudad");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(35, 135, 33, 14);
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha de Ingreso: ");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(360, 135, 91, 14);
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Horario:");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(214, 77, 39, 14);
+        jPanel1.add(jDate);
+        jDate.setBounds(356, 109, 95, 20);
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(jComboBox3);
+        jComboBox3.setBounds(22, 71, 56, 20);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel5)))
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel4)))
-                        .addGap(67, 67, 67)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addGap(27, 27, 27))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel10)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/images.jpg"))); // NOI18N
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(-790, -370, 1330, 650);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aceptar.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 18, 480, 170);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancelar.png"))); // NOI18N
         jButton2.setBorderPainted(false);
@@ -203,6 +188,8 @@ public class VCrearAlumnos extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(40, 200, 81, 57);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/refrescar.png"))); // NOI18N
         jButton3.setBorderPainted(false);
@@ -212,36 +199,23 @@ public class VCrearAlumnos extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(210, 200, 81, 57);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(84, 84, 84)
-                .addComponent(jButton1)
-                .addGap(76, 76, 76))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aceptar.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(370, 200, 81, 57);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fondo.jpg"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(-10, -80, 570, 420);
 
         bindingGroup.bind();
 
@@ -251,11 +225,26 @@ public class VCrearAlumnos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-            estudiantecontroller.getEstudiantenuevo().setDepartamento(Departamentos.valueOf(jComboBox2.getSelectedItem().toString()));
-            estudiantecontroller.getEstudiantenuevo().setCiudad(Ciudades.valueOf(jComboBox1.getSelectedItem().toString()));
-            estudiantecontroller.getEstudiantenuevo().setTipoIdentificacion(Identificacion.valueOf(jComboBox3.getSelectedItem().toString()));
-            estudiantecontroller.getEstudiantenuevo().setFechaDeIngreso(jDate.getDate());
-            estudiantecontroller.guardarestudiantenuevo();
+            if (actividad == 1) {
+                estudiantecontroller.getEstudiantenuevo().setDepartamento(Departamentos.valueOf(jComboBox2.getSelectedItem().toString()));
+                estudiantecontroller.getEstudiantenuevo().setCiudad(Ciudades.valueOf(jComboBox1.getSelectedItem().toString()));
+                estudiantecontroller.getEstudiantenuevo().setTipoIdentificacion(Identificacion.valueOf(jComboBox3.getSelectedItem().toString()));
+                estudiantecontroller.getEstudiantenuevo().setFechaDeIngreso(jDate.getDate());
+                estudiantecontroller.guardarestudiantenuevo();
+            }
+
+            if (actividad == 2) { 
+                estudianteactualizar.setNombre(jTextField1.getText());
+                estudianteactualizar.setApellidos(jTextField2.getText());
+                estudianteactualizar.setIdentificacion(Integer.parseInt(jTextField3.getText()));
+                estudianteactualizar.setDepartamento(Departamentos.valueOf(jComboBox2.getSelectedItem().toString()));
+                estudianteactualizar.setCiudad(Ciudades.valueOf(jComboBox1.getSelectedItem().toString()));
+                estudianteactualizar.setTipoIdentificacion(Identificacion.valueOf(jComboBox3.getSelectedItem().toString()));
+                estudianteactualizar.setFechaDeIngreso(jDate.getDate());
+                estudiantecontroller.setEstudianteactualizar(estudianteactualizar);
+                estudiantecontroller.editar();
+            }
+
         } catch (HibernateException exception) {
             System.out.println("Problem creating session factory");
             exception.printStackTrace();
@@ -275,6 +264,21 @@ public class VCrearAlumnos extends javax.swing.JFrame {
         // TODO add your handling code here:
         Limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        try{
+        jTextField1.setText(estudianteactualizar.getNombre());
+        jTextField2.setText(estudianteactualizar.getApellidos());
+        jTextField3.setText(String.valueOf(estudianteactualizar.getIdentificacion()));
+        jDate.setDate(estudianteactualizar.getFechaDeIngreso());
+        jComboBox1.setSelectedIndex(estudianteactualizar.getCiudad().ordinal());
+        jComboBox2.setSelectedIndex(estudianteactualizar.getDepartamento().ordinal());
+        jComboBox3.setSelectedIndex(estudianteactualizar.getTipoIdentificacion().ordinal());
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -323,9 +327,11 @@ public class VCrearAlumnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -340,19 +346,19 @@ public class VCrearAlumnos extends javax.swing.JFrame {
         jComboBox2.setModel(departamentosmodel);
     }
 
-    private void initCiudades(){
+    private void initCiudades() {
         ArrayList<String> ciudades = estudiantecontroller.enumCiudades();
         DefaultComboBoxModel ciudadesmodel = new DefaultComboBoxModel(ciudades.toArray());
         jComboBox1.setModel(ciudadesmodel);
     }
-    
-    private void initTipoIden(){
+
+    private void initTipoIden() {
         ArrayList<String> tipoIdentificacion = estudiantecontroller.enumIdentificacion();
         DefaultComboBoxModel tipoidenmodel = new DefaultComboBoxModel(tipoIdentificacion.toArray());
         jComboBox3.setModel(tipoidenmodel);
     }
-    
-    private void Limpiar(){
+
+    private void Limpiar() {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");

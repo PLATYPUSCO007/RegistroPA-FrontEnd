@@ -23,8 +23,10 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
     DefaultTableModel tmodel = new DefaultTableModel();
     EstudianteController estudiantecontroller;
     List<Estudiante> estudiantesbuscados;
+    VAlumno alumno;
     
     public VBuscarAlumnos() {
+        alumno = new VAlumno();
         estudiantecontroller = new EstudianteController();
         initComponents();
         modelotabla();
@@ -44,19 +46,18 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(567, 305));
-        setMinimumSize(new java.awt.Dimension(567, 305));
-        setPreferredSize(new java.awt.Dimension(567, 305));
+        setMinimumSize(new java.awt.Dimension(580, 350));
         getContentPane().setLayout(null);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nombre", "apellidos", "Identificacion", "Departamento", "Ciudad" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nombre", "apellidos", "identificacion", "departamento", "ciudad" }));
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(20, 30, 94, 20);
+        jComboBox1.setBounds(20, 30, 110, 20);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(150, 30, 220, 20);
+        jTextField1.setBounds(150, 20, 230, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,23 +73,36 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 70, 510, 150);
+        jScrollPane1.setBounds(20, 80, 510, 150);
 
-        jButton1.setText("Buscar");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-evidence-filled-50.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(460, 240, 65, 23);
+        jButton1.setBounds(390, 240, 100, 70);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancelar.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(70, 250, 80, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fondo.jpg"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(600, 400));
-        jLabel1.setMinimumSize(new java.awt.Dimension(600, 400));
-        jLabel1.setPreferredSize(new java.awt.Dimension(600, 400));
+        jLabel1.setMaximumSize(new java.awt.Dimension(580, 350));
+        jLabel1.setMinimumSize(new java.awt.Dimension(580, 350));
+        jLabel1.setPreferredSize(new java.awt.Dimension(580, 350));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 580, 290);
+        jLabel1.setBounds(0, 0, 580, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,7 +129,16 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
         });
     }catch(Exception e){
     }
+    jTextField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        alumno.setVisible(true);
+        alumno.setLocationRelativeTo(null);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +177,7 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

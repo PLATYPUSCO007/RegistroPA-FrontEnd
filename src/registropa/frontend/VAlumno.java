@@ -28,7 +28,6 @@ public class VAlumno extends javax.swing.JFrame {
     public VAlumno() {
         estudiantecontroller = new EstudianteController();
         initComponents();
-        tablemodel();
     }
 
     /**
@@ -92,6 +91,11 @@ public class VAlumno extends javax.swing.JFrame {
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(310, 20, 90, 70);
 
@@ -109,6 +113,11 @@ public class VAlumno extends javax.swing.JFrame {
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4);
         jButton4.setBounds(310, 130, 90, 80);
 
@@ -156,20 +165,8 @@ public class VAlumno extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        listaEstudiantes = estudiantecontroller.getTraerEstudiantes();
-        Tmodel.setRowCount(0);
-        listaEstudiantes.stream().map((estudiantes) -> new Object[]{estudiantes.getId(),
-            estudiantes.getNombre(),
-            estudiantes.getApellidos(),
-            estudiantes.getTipoIdentificacion(),
-            estudiantes.getIdentificacion(),
-            estudiantes.getFechaDeIngreso()
-        }).map((objetos) -> {
-        Tmodel.addRow(objetos);
-        return objetos;
-    }).forEachOrdered((_item) -> {
-        Tmodel.getDataVector();
-    });
+        tablemodel();
+        tableopened();
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -179,6 +176,27 @@ public class VAlumno extends javax.swing.JFrame {
         vbuscar.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        int column = jTable1.getSelectedColumn();
+        estudiantecontroller.setKey((int) jTable1.getValueAt(row, column));
+        vcrear = new VCrearAlumnos(estudiantecontroller.traerUnEstudiante());
+        vcrear.setVisible(true);
+        vcrear.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        int colmun = jTable1.getSelectedColumn();
+        estudiantecontroller.setKey((int) jTable1.getValueAt(row, colmun));
+        estudiantecontroller.eliminar();
+        estudiantecontroller.listaEstudiantes();
+        tableopened();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +255,23 @@ public class VAlumno extends javax.swing.JFrame {
         Tmodel.addColumn("Nº Ident.");
         Tmodel.addColumn("Fecha Ingr.");
         jTable1.setModel(Tmodel);
+    }
+
+    private void tableopened() {
+        listaEstudiantes = estudiantecontroller.getTraerEstudiantes();
+        Tmodel.setRowCount(0);
+        listaEstudiantes.stream().map((estudiantes) -> new Object[]{estudiantes.getId(),
+            estudiantes.getNombre(),
+            estudiantes.getApellidos(),
+            estudiantes.getTipoIdentificacion(),
+            estudiantes.getIdentificacion(),
+            estudiantes.getFechaDeIngreso()
+        }).map((objetos) -> {
+            Tmodel.addRow(objetos);
+            return objetos;
+        }).forEachOrdered((_item) -> {
+            Tmodel.getDataVector();
+        });
     }
 
 }
