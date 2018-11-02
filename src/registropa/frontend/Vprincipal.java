@@ -42,9 +42,7 @@ public class Vprincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 102, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(400, 350));
         setMinimumSize(new java.awt.Dimension(400, 350));
-        setPreferredSize(new java.awt.Dimension(400, 350));
         getContentPane().setLayout(null);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/profesor2.png"))); // NOI18N
@@ -72,24 +70,24 @@ public class Vprincipal extends javax.swing.JFrame {
         jButton2.setBounds(30, 150, 130, 100);
 
         jLabel2.setFont(new java.awt.Font("Ravie", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Docente");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(250, 250, 90, 20);
+        jLabel2.setBounds(250, 260, 90, 20);
 
         jLabel3.setFont(new java.awt.Font("Ravie", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Alumno");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(60, 250, 80, 30);
 
         jLabel4.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Sistema de Registro de Notas");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(40, 30, 330, 40);
+        jLabel4.setBounds(40, 80, 330, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cun.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fondo.jpg"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(500, 500));
         jLabel1.setMinimumSize(new java.awt.Dimension(500, 500));
         jLabel1.setOpaque(true);

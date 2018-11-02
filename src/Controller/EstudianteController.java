@@ -115,10 +115,13 @@ public class EstudianteController {
         tx = session.beginTransaction();
         Runner.addSession(session);
         estudiantedao = new EstudianteDao();
-        if (campo.equalsIgnoreCase("identificacion")) {
-            buscarEstudiantes = estudiantedao.buscarEstudiantesSimilares(campo, Integer.parseInt(valor));
-        } else {
-            buscarEstudiantes = estudiantedao.buscarEstudiantesSimilares(campo, valor);
+        try {
+            if (campo.equalsIgnoreCase("identificacion")) {
+                buscarEstudiantes = estudiantedao.recuperarVarios(campo, Integer.parseInt(valor));
+            } else {
+                buscarEstudiantes = estudiantedao.recuperarVarios(campo, valor);
+            }
+        } catch (Exception e) {
         }
         tx.commit();
         session.close();
@@ -158,10 +161,7 @@ public class EstudianteController {
     }
 
     public void eliminar() {
-        try {
-            eliminarEstudiante();
-        } catch (Exception e) {
-        }
+        eliminarEstudiante();
     }
 
     private void eliminarEstudiante() {

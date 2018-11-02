@@ -6,6 +6,7 @@
 package registropa.frontend;
 
 import Controller.EstudianteController;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Estudiante;
@@ -19,14 +20,15 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
     /**
      * Creates new form VBuscarAlumnos
      */
-    
     DefaultTableModel tmodel = new DefaultTableModel();
     EstudianteController estudiantecontroller;
     List<Estudiante> estudiantesbuscados;
     VAlumno alumno;
-    
+    String[] estudiante;
+
     public VBuscarAlumnos() {
         alumno = new VAlumno();
+        estudiantesbuscados = new ArrayList<Estudiante>();
         estudiantecontroller = new EstudianteController();
         initComponents();
         modelotabla();
@@ -111,25 +113,8 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
         // TODO add your handling code here:
         estudiantecontroller.setCampo(jComboBox1.getSelectedItem().toString());
         estudiantecontroller.setValor(jTextField1.getText());
-
-    try{
-        estudiantesbuscados = estudiantecontroller.buscarEstud();
-        tmodel.setRowCount(0);
-        estudiantesbuscados.stream().map((estudiantes) -> new Object[]{estudiantes.getId(),
-            estudiantes.getNombre(),
-            estudiantes.getApellidos(),
-            estudiantes.getTipoIdentificacion(),
-            estudiantes.getIdentificacion(),
-            estudiantes.getFechaDeIngreso()
-        }).map((objetos) -> {
-            tmodel.addRow(objetos);
-            return objetos;
-        }).forEachOrdered((_item) -> {
-            tmodel.getDataVector();
-        });
-    }catch(Exception e){
-    }
-    jTextField1.setText("");
+        datosModeloTabla();
+        jTextField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -137,7 +122,6 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
         alumno.setVisible(true);
         alumno.setLocationRelativeTo(null);
         this.dispose();
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -185,7 +169,7 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    private void modelotabla(){
+    private void modelotabla() {
         tmodel.addColumn("Id");
         tmodel.addColumn("Nombre");
         tmodel.addColumn("Apellido");
@@ -194,5 +178,22 @@ public class VBuscarAlumnos extends javax.swing.JFrame {
         tmodel.addColumn("F. Ingreso");
         jTable1.setModel(tmodel);
     }
-    
+
+    private void datosModeloTabla(){
+        try {
+            tmodel.setRowCount(0);
+            estudiantesbuscados = estudiantecontroller.buscarEstud();
+            for (int i = 0; i < estudiantesbuscados.size(); i++) {
+                estudiante = new String[]{String.valueOf(estudiantesbuscados.get(i).getId()),
+                    estudiantesbuscados.get(i).getNombre(),
+                    estudiantesbuscados.get(i).getApellidos(),
+                    estudiantesbuscados.get(i).getTipoIdentificacion().name(),
+                    String.valueOf(estudiantesbuscados.get(i).getIdentificacion()),
+                    estudiantesbuscados.get(i).getFechaDeIngreso().toString()
+                };
+                tmodel.addRow(estudiante);
+            }
+        } catch (Exception e) {
+        }
+    }
 }
