@@ -11,6 +11,14 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Bautista/Documents/GitHub/RegistroPA-FrontEnd/src/registropa/frontend/VCrearAlumnos.java</file>
+            <file>file:/C:/Users/Bautista/Documents/GitHub/RegistroPA-FrontEnd/src/Controller/ProfesorController.java</file>
+            <file>file:/C:/Users/Bautista/Documents/GitHub/RegistroPA-FrontEnd/src/registropa/frontend/VCrearPorfesor.java</file>
+            <file>file:/C:/Users/Bautista/Documents/GitHub/RegistroPA-FrontEnd/src/Controller/EstudianteController.java</file>
+            <file>file:/C:/Users/Bautista/Documents/GitHub/RegistroPA-FrontEnd/src/registropa/frontend/VAlumno.java</file>
+            <file>file:/C:/Users/Bautista/Documents/GitHub/RegistroPA-FrontEnd/src/registropa/frontend/VProfesor.java</file>
+            <file>file:/C:/Users/Bautista/Documents/GitHub/RegistroPA-FrontEnd/src/registropa/frontend/VBuscarProfesor.java</file>
+        </group>
     </open-files>
 </project-private>

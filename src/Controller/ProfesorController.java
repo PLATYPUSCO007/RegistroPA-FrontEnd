@@ -5,51 +5,50 @@
  */
 package Controller;
 
-/**
- *
- * @author Bautista
- */
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Ciudades;
 import modelo.Departamentos;
-import modelo.Estudiante;
 import modelo.Identificacion;
+import modelo.Profesor;
 import org.hibernate.HibernateException;
-import repositorio.EstudianteDao;
-import repositorio.Runner;
-import repositorio.SessionFactoryProvider;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import repositorio.ProfesorDao;
+import repositorio.Runner;
+import repositorio.SessionFactoryProvider;
 
-public class EstudianteController {
-
-    private EstudianteDao estudiantedao;
+/**
+ *
+ * @author Bautista
+ */
+public class ProfesorController {
+    
+    private ProfesorDao profesordao;
     private Session session;
     private Transaction tx;
-    private Estudiante estudiante;
-    private Estudiante estudiantenuevo;
+    private Profesor profesornuevo;
     private ArrayList<String> departamentos = new ArrayList<String>();
     private ArrayList<String> ciudades = new ArrayList<String>();
     private Departamentos[] dep;
     private Ciudades[] ciu;
-    private List<Estudiante> traerEstudiantes;
+    private List<Profesor> traerProfesores;
     private ArrayList<String> tipoIdentificacion = new ArrayList<String>();
     private Identificacion[] iden;
-    private List<Estudiante> buscarEstudiantes;
+    private List<Profesor> buscarProfesores;
     private String campo;
     private String valor;
-    private Estudiante estudianteactualizar;
+    private Profesor profesoractualizar;
     private int key = 0;
-
-    public EstudianteController() {
-        estudiantenuevo = new Estudiante();
-        enumDepartamentos();
+    
+    public ProfesorController(){
+        profesornuevo = new Profesor();
         enumCiudades();
+        enumDepartamentos();
         enumIdentificacion();
-        listaEstudiantes();
+        listaProfesores();
     }
-
+    
     public ArrayList<String> enumIdentificacion() {
         iden = Identificacion.values();
         for (Identificacion ident : iden) {
@@ -74,54 +73,54 @@ public class EstudianteController {
         return ciudades;
     }
 
-    public void guardarestudiantenuevo() {
+    public void guardarprofesornuevo() {
         try {
-            guardarEstudiante();
+            guardarProfesor();
         } catch (HibernateException exception) {
             System.out.println("Problem creating session factory");
             exception.printStackTrace();
         }
     }
 
-    private void guardarEstudiante() {
+    private void guardarProfesor() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
-        estudiantedao = new EstudianteDao();
-        estudiantedao.guardar(estudiantenuevo);
+        profesordao = new ProfesorDao();
+        profesordao.guardar(profesornuevo);
         tx.commit();
         session.close();
     }
 
-    public List<Estudiante> listaEstudiantes() {
-        return traerEstudiantes();
+    public List<Profesor> listaProfesores() {
+        return traerProfesores();
     }
 
-    private List<Estudiante> traerEstudiantes() {
+    private List<Profesor> traerProfesores() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
-        estudiantedao = new EstudianteDao();
-        traerEstudiantes = estudiantedao.traerTodo();
+        profesordao = new ProfesorDao();
+        traerProfesores = profesordao.traerTodo();
         tx.commit();
         session.close();
-        return traerEstudiantes;
+        return traerProfesores;
     }
 
-    public List<Estudiante> buscarEstud() {
-        return buscarEstudiantes();
+    public List<Profesor> buscarPro() {
+        return buscarProfesores();
     }
 
-    private List<Estudiante> buscarEstudiantes() {
+    private List<Profesor> buscarProfesores() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
-        estudiantedao = new EstudianteDao();
+        profesordao = new ProfesorDao();
         try {
             if (campo.equalsIgnoreCase("identificacion")) {
-                buscarEstudiantes = estudiantedao.recuperarVarios(campo, Integer.parseInt(valor));
+                buscarProfesores = profesordao.recuperarVarios(campo, Integer.parseInt(valor));
             } else {
-                buscarEstudiantes = estudiantedao.recuperarVarios(campo, valor);
+                buscarProfesores = profesordao.recuperarVarios(campo, valor);
             }
         } catch (Exception e) {
         }
@@ -129,83 +128,67 @@ public class EstudianteController {
         session.close();
         campo = "";
         valor = "";
-        return buscarEstudiantes;
+        return buscarProfesores;
     }
 
-    public Estudiante traerUnEstudiante() {
+    public Profesor traerUnProfesor() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
-        estudiantedao = new EstudianteDao();
-        estudianteactualizar = estudiantedao.recuperar(key);
+        profesordao = new ProfesorDao();
+        profesoractualizar = profesordao.recuperar(key);
         tx.commit();
         session.close();
-        return estudianteactualizar;
+        return profesoractualizar;
     }
 
     public void editar() {
         try {
-            editarEstudiante();
+            editarProfesor();
         } catch (HibernateException exception) {
             System.out.println("Problem creating session factory");
             exception.printStackTrace();
         }
     }
 
-    private void editarEstudiante() {
+    private void editarProfesor() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
-        estudiantedao = new EstudianteDao();
-        estudiantedao.actualizar(estudianteactualizar);
+        profesordao = new ProfesorDao();
+        profesordao.actualizar(profesoractualizar);
         tx.commit();
         session.close();
     }
 
     public void eliminar() {
-        eliminarEstudiante();
+        eliminarProfesor();
     }
 
-    private void eliminarEstudiante() {
+    private void eliminarProfesor() {
         session = SessionFactoryProvider.getInstance().createSession();
         tx = session.beginTransaction();
         Runner.addSession(session);
-        estudiantedao = new EstudianteDao();
-        estudiantedao.borrar("id", key);
+        profesordao = new ProfesorDao();
+        profesordao.borrar("id", key);
         tx.commit();
         session.close();
     }
 
-    public List<Estudiante> getTraerEstudiantes() {
-        return traerEstudiantes;
+    public ProfesorDao getProfesordao() {
+        return profesordao;
     }
 
-    public void setTraerEstudiantes(List<Estudiante> traerEstudiantes) {
-        this.traerEstudiantes = traerEstudiantes;
+    public void setProfesordao(ProfesorDao profesordao) {
+        this.profesordao = profesordao;
     }
 
-    public EstudianteDao getEstudiantedao() {
-        return estudiantedao;
+    public Profesor getProfesornuevo() {
+        return profesornuevo;
     }
 
-    public void setEstudiantedao(EstudianteDao estudiantedao) {
-        this.estudiantedao = estudiantedao;
-    }
-
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
-
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
-    }
-
-    public Estudiante getEstudiantenuevo() {
-        return estudiantenuevo;
-    }
-
-    public void setEstudiantenuevo(Estudiante estudiantenuevo) {
-        this.estudiantenuevo = estudiantenuevo;
+    public void setProfesornuevo(Profesor profesornuevo) {
+        this.profesornuevo = profesornuevo;
     }
 
     public ArrayList<String> getDepartamentos() {
@@ -224,6 +207,30 @@ public class EstudianteController {
         this.ciudades = ciudades;
     }
 
+    public Departamentos[] getDep() {
+        return dep;
+    }
+
+    public void setDep(Departamentos[] dep) {
+        this.dep = dep;
+    }
+
+    public Ciudades[] getCiu() {
+        return ciu;
+    }
+
+    public void setCiu(Ciudades[] ciu) {
+        this.ciu = ciu;
+    }
+
+    public List<Profesor> getTraerProfesores() {
+        return traerProfesores;
+    }
+
+    public void setTraerProfesores(List<Profesor> traerProfesores) {
+        this.traerProfesores = traerProfesores;
+    }
+
     public ArrayList<String> getTipoIdentificacion() {
         return tipoIdentificacion;
     }
@@ -232,12 +239,20 @@ public class EstudianteController {
         this.tipoIdentificacion = tipoIdentificacion;
     }
 
-    public List<Estudiante> getBuscarEstudiantes() {
-        return buscarEstudiantes;
+    public Identificacion[] getIden() {
+        return iden;
     }
 
-    public void setBuscarEstudiantes(List<Estudiante> buscarEstudiantes) {
-        this.buscarEstudiantes = buscarEstudiantes;
+    public void setIden(Identificacion[] iden) {
+        this.iden = iden;
+    }
+
+    public List<Profesor> getBuscarProfesores() {
+        return buscarProfesores;
+    }
+
+    public void setBuscarProfesores(List<Profesor> buscarProfesores) {
+        this.buscarProfesores = buscarProfesores;
     }
 
     public String getCampo() {
@@ -256,12 +271,12 @@ public class EstudianteController {
         this.valor = valor;
     }
 
-    public Estudiante getEstudianteactualizar() {
-        return estudianteactualizar;
+    public Profesor getProfesoractualizar() {
+        return profesoractualizar;
     }
 
-    public void setEstudianteactualizar(Estudiante estudianteactualizar) {
-        this.estudianteactualizar = estudianteactualizar;
+    public void setProfesoractualizar(Profesor profesoractualizar) {
+        this.profesoractualizar = profesoractualizar;
     }
 
     public int getKey() {
@@ -271,5 +286,7 @@ public class EstudianteController {
     public void setKey(int key) {
         this.key = key;
     }
-
+    
+    
+    
 }

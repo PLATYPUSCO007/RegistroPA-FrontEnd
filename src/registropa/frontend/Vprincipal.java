@@ -16,7 +16,7 @@ public class Vprincipal extends javax.swing.JFrame {
      */
     
     VAlumno valumnos;
-    Vdocente vdocente;
+    VProfesor vprofesor;
     
     public Vprincipal() {
         initComponents();
@@ -108,9 +108,9 @@ public class Vprincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        vdocente = new Vdocente();
-        vdocente.setVisible(true);
-        vdocente.setLocationRelativeTo(null);
+        vprofesor = new VProfesor();
+        vprofesor.setVisible(true);
+        vprofesor.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

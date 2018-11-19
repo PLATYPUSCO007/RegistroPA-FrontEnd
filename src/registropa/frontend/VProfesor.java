@@ -5,29 +5,29 @@
  */
 package registropa.frontend;
 
-import Controller.EstudianteController;
+import Controller.ProfesorController;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import modelo.Estudiante;
+import modelo.Profesor;
 
 /**
  *
  * @author Bautista
  */
-public class VAlumno extends javax.swing.JFrame {
+public class VProfesor extends javax.swing.JFrame {
 
     /**
-     * Creates new form VAlumno
+     * Creates new form Vdocente
      */
-    DefaultTableModel Tmodel = new DefaultTableModel();
-    VCrearAlumnos vcrear;
-    List<Estudiante> listaEstudiantes;
-    EstudianteController estudiantecontroller;
-    VBuscarAlumnos vbuscar;
+    DefaultTableModel Tmodelp = new DefaultTableModel();
+    List<Profesor> listaProfesores;
+    ProfesorController profesorcontroller;
+    VCrearPorfesor vcrearprofesor;
+    VBuscarProfesor vbuscarprofesor;
     Vprincipal vprincipal;
-
-    public VAlumno() {
-        estudiantecontroller = new EstudianteController();
+    
+    public VProfesor() {
+        profesorcontroller = new ProfesorController();
         initComponents();
     }
 
@@ -41,16 +41,16 @@ public class VAlumno extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -58,6 +58,7 @@ public class VAlumno extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(480, 460));
         setMinimumSize(new java.awt.Dimension(480, 460));
         setPreferredSize(new java.awt.Dimension(480, 460));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -65,7 +66,7 @@ public class VAlumno extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/crear.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar.png"))); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +75,40 @@ public class VAlumno extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(70, 160, 90, 70);
+        jButton1.setBounds(40, 60, 130, 70);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(280, 40, 147, 79);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(300, 150, 120, 70);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/crear.png"))); // NOI18N
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(80, 150, 60, 60);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,71 +124,37 @@ public class VAlumno extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 250, 430, 90);
+        jScrollPane1.setBounds(40, 250, 400, 100);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(310, 40, 90, 70);
+        jLabel7.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel7.setText("EDITAR");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(330, 220, 90, 20);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar.png"))); // NOI18N
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(70, 50, 90, 60);
+        jLabel8.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel8.setText("ELIMINAR");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(320, 120, 100, 20);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(310, 150, 90, 80);
-
-        jLabel2.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel2.setText("BUSCAR");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 110, 90, 20);
-
-        jLabel3.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel3.setText("ELIMINAR");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(310, 110, 110, 20);
-
-        jLabel4.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel4.setText("CREAR");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(80, 220, 70, 20);
-
-        jLabel5.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel5.setText("EDITAR");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(320, 220, 80, 20);
+        jLabel9.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel9.setText("CREAR");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(80, 210, 90, 20);
 
         jLabel10.setFont(new java.awt.Font("Ravie", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("ALUMNOS");
+        jLabel10.setText("PROFESOR");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(160, 10, 180, 20);
+        jLabel10.setBounds(150, 20, 180, 20);
+
+        jLabel11.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel11.setText("BUSCAR");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(70, 120, 90, 20);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/PP.png"))); // NOI18N
         jButton5.setBorderPainted(false);
@@ -165,25 +165,17 @@ public class VAlumno extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(200, 350, 70, 50);
+        jButton5.setBounds(200, 360, 90, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fondo.jpg"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(500, 500));
-        jLabel1.setMinimumSize(new java.awt.Dimension(500, 500));
-        jLabel1.setPreferredSize(new java.awt.Dimension(500, 500));
+        jLabel1.setMaximumSize(new java.awt.Dimension(480, 400));
+        jLabel1.setMinimumSize(new java.awt.Dimension(480, 400));
+        jLabel1.setPreferredSize(new java.awt.Dimension(480, 400));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(-70, 0, 570, 490);
+        jLabel1.setBounds(0, 0, 640, 520);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        vcrear = new VCrearAlumnos();
-        vcrear.setVisible(true);
-        vcrear.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -191,40 +183,48 @@ public class VAlumno extends javax.swing.JFrame {
         tableopened();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        vbuscar = new VBuscarAlumnos();
-        vbuscar.setVisible(true);
-        vbuscar.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        try {
-        int row = jTable1.getSelectedRow();
-        int column = jTable1.getSelectedColumn();
-        estudiantecontroller.setKey((int) jTable1.getValueAt(row, column));
-        vcrear = new VCrearAlumnos(estudiantecontroller.traerUnEstudiante());
-        vcrear.setVisible(true);
-        vcrear.setLocationRelativeTo(null);
-        this.dispose();
-        }catch(Throwable e){
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
         int row = jTable1.getSelectedRow();
         int colmun = jTable1.getSelectedColumn();
-        estudiantecontroller.setKey((int) jTable1.getValueAt(row, colmun));
-        estudiantecontroller.eliminar();
-        estudiantecontroller.listaEstudiantes();
+        profesorcontroller.setKey((int) jTable1.getValueAt(row, colmun));
+        profesorcontroller.eliminar();
+        profesorcontroller.listaProfesores();
         tableopened();
         }catch(Throwable e){
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        vcrearprofesor = new VCrearPorfesor();
+        vcrearprofesor.setVisible(true);
+        vcrearprofesor.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try{
+        int row = jTable1.getSelectedRow();
+        int column = jTable1.getSelectedColumn();
+        profesorcontroller.setKey((int) jTable1.getValueAt(row, column));
+        vcrearprofesor = new VCrearPorfesor(profesorcontroller.traerUnProfesor());
+        vcrearprofesor.setVisible(true);
+        vcrearprofesor.setLocationRelativeTo(null);
+        this.dispose();
+        }catch(Throwable e){
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        vbuscarprofesor = new VBuscarProfesor();
+        vbuscarprofesor.setVisible(true);
+        vbuscarprofesor.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -251,20 +251,21 @@ public class VAlumno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VAlumno().setVisible(true);
+                new VProfesor().setVisible(true);
             }
         });
     }
@@ -277,39 +278,38 @@ public class VAlumno extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    public void tablemodel() {
-        Tmodel.addColumn("Id");
-        Tmodel.addColumn("Nombre");
-        Tmodel.addColumn("Apellido");
-        Tmodel.addColumn("Tipo Ident.");
-        Tmodel.addColumn("Nº Ident.");
-        Tmodel.addColumn("Fecha Ingr.");
-        jTable1.setModel(Tmodel);
+   public void tablemodel() {
+        Tmodelp.addColumn("Id");
+        Tmodelp.addColumn("Nombre");
+        Tmodelp.addColumn("Apellido");
+        Tmodelp.addColumn("Tipo Ident.");
+        Tmodelp.addColumn("Nº Ident.");
+        Tmodelp.addColumn("Area");
+        jTable1.setModel(Tmodelp);
     }
 
-    private void tableopened() {
-        listaEstudiantes = estudiantecontroller.getTraerEstudiantes();
-        Tmodel.setRowCount(0);
-        listaEstudiantes.stream().map((estudiantes) -> new Object[]{estudiantes.getId(),
-            estudiantes.getNombre(),
-            estudiantes.getApellidos(),
-            estudiantes.getTipoIdentificacion(),
-            estudiantes.getIdentificacion(),
-            estudiantes.getFechaDeIngreso()
+private void tableopened() {
+        listaProfesores = profesorcontroller.getTraerProfesores();
+        Tmodelp.setRowCount(0);
+        listaProfesores.stream().map((profesores) -> new Object[]{profesores.getId(),
+            profesores.getNombre(),
+            profesores.getApellidos(),
+            profesores.getTipoIdentificacion(),
+            profesores.getIdentificacion(),
+            profesores.getArea()
         }).map((objetos) -> {
-            Tmodel.addRow(objetos);
+            Tmodelp.addRow(objetos);
             return objetos;
         }).forEachOrdered((_item) -> {
-            Tmodel.getDataVector();
+            Tmodelp.getDataVector();
         });
     }
-
 }
