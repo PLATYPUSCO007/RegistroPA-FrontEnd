@@ -24,7 +24,7 @@ public class VAlumno extends javax.swing.JFrame {
     List<Estudiante> listaEstudiantes;
     EstudianteController estudiantecontroller;
     VBuscarAlumnos vbuscar;
-    Vprincipal vprincipal;
+    VPrincipalAdmin vprincipal;
 
     public VAlumno() {
         estudiantecontroller = new EstudianteController();
@@ -228,7 +228,7 @@ public class VAlumno extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        vprincipal = new Vprincipal();
+        vprincipal = new VPrincipalAdmin();
         vprincipal.setVisible(true);
         vprincipal.setLocationRelativeTo(null);
         this.dispose();
